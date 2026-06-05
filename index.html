@@ -71,7 +71,7 @@
     select option { background: #1a1a2e; color: #fff; }
     select:disabled { opacity: 0.4; cursor: not-allowed; }
 
-    /* ── Button ── */
+    /* ── Primary Button ── */
     .btn {
       width: 100%;
       margin-top: 0.5rem;
@@ -137,6 +137,52 @@
       color: #ffb3bf;
     }
 
+    /* ── "Coba Lagi" Button ── */
+    #tryAgainBtn {
+      width: 100%;
+      margin-top: 1rem;
+      padding: 0.7rem;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      border-radius: 12px;
+      background: transparent;
+      color: rgba(255,255,255,0.75);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
+      display: none; /* hidden until first result */
+    }
+    #tryAgainBtn:hover  {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.5);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+    #tryAgainBtn:active { transform: translateY(0); }
+
+    /* ── Deck Progress ── */
+    #deckInfo {
+      margin-top: 0.85rem;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.35);
+      text-align: center;
+      display: none;
+    }
+    #deckInfo .deck-bar-wrap {
+      margin-top: 0.4rem;
+      height: 4px;
+      border-radius: 99px;
+      background: rgba(255,255,255,0.1);
+      overflow: hidden;
+    }
+    #deckInfo .deck-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, #e94560, #ff7096);
+      transition: width 0.4s ease;
+    }
+
     /* ── Error / Info ── */
     .msg {
       margin-top: 1rem;
@@ -148,9 +194,6 @@
     }
     .msg.error { background: rgba(233,69,96,0.2); border: 1px solid rgba(233,69,96,0.4); color: #ffb3bf; }
     .msg.info  { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.7); }
-
-    /* ── Footer ── */
-    footer { margin-top: 2rem; font-size: 0.78rem; color: rgba(255,255,255,0.3); text-align: center; }
   </style>
 </head>
 <body>
@@ -190,17 +233,24 @@
   <div id="result">
     <div class="result-label">✨ Kamu harus coba ini!</div>
     <div class="store-name" id="storeName"></div>
-    <div class="store-area">
-      📍 <span id="storeArea"></span>
+    <div class="store-area">📍 <span id="storeArea"></span></div>
+  </div>
+
+  <!-- Coba Lagi -->
+  <button id="tryAgainBtn">🔄 Coba Lagi</button>
+
+  <!-- Deck Progress -->
+  <div id="deckInfo">
+    <span id="deckText"></span>
+    <div class="deck-bar-wrap">
+      <div class="deck-bar-fill" id="deckBarFill"></div>
     </div>
   </div>
 </div>
 
-<footer>Data bersumber dari Mall_FnB_Directory.csv</footer>
-
 <script>
   /* ════════════════════════════════════════════
-     CONFIG — sesuaikan nama kolom jika berbeda
+     CONFIG
   ════════════════════════════════════════════ */
   const CSV_FILE     = 'Mall_FnB_Directory.csv';
   const COL_MALL     = 'Mall';
@@ -211,25 +261,21 @@
   /* ════════════════════════════════════════════
      STATE
   ════════════════════════════════════════════ */
-  let allData = [];   // array of row-objects
+  let allData       = [];
+  let deck          = [];
+  let lastStoreName = null;
 
   /* ════════════════════════════════════════════
      UTILS
   ════════════════════════════════════════════ */
-
-  /** Minimal CSV parser — handles quoted fields with commas/newlines */
   function parseCSV(text) {
-    const rows   = [];
-    let   field  = '';
-    let   row    = [];
-    let   inQuote = false;
+    const rows = [];
+    let field = '', row = [], inQuote = false;
 
     for (let i = 0; i < text.length; i++) {
-      const ch   = text[i];
-      const next = text[i + 1];
-
+      const ch = text[i], next = text[i + 1];
       if (inQuote) {
-        if (ch === '"' && next === '"') { field += '"'; i++; }   // escaped quote
+        if (ch === '"' && next === '"') { field += '"'; i++; }
         else if (ch === '"')            { inQuote = false; }
         else                            { field += ch; }
       } else {
@@ -240,14 +286,48 @@
         else                  { field += ch; }
       }
     }
-    // last field / row
     if (field || row.length) { row.push(field.trim()); rows.push(row); }
 
-    // Convert to array-of-objects using first row as headers
-    const headers = rows[0].map(h => h.replace(/^\uFEFF/, '')); // strip BOM
+    const headers = rows[0].map(h => h.replace(/^\uFEFF/, ''));
     return rows.slice(1)
-               .filter(r => r.some(c => c !== ''))              // skip blank rows
+               .filter(r => r.some(c => c !== ''))
                .map(r => Object.fromEntries(headers.map((h, i) => [h, r[i] ?? ''])));
+  }
+
+  function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function buildDeck(pool) {
+    let d = shuffle(pool);
+    if (d.length > 1 && lastStoreName !== null && d[0][COL_STORE] === lastStoreName) {
+      const swapIdx = Math.floor(Math.random() * (d.length - 1)) + 1;
+      [d[0], d[swapIdx]] = [d[swapIdx], d[0]];
+    }
+    return d;
+  }
+
+  function getPool() {
+    const mall     = document.getElementById('mallSelect').value;
+    const category = document.getElementById('categorySelect').value;
+    let pool = allData.filter(r => r[COL_MALL] === mall);
+    if (category && category !== '__ALL__') {
+      pool = pool.filter(r => r[COL_CATEGORY] === category);
+    }
+    return pool;
+  }
+
+  function resetDeck() {
+    deck          = [];
+    lastStoreName = null;
+    hideResult();
+    updateDeckInfo(0, 0);
+    showMsg(null);
   }
 
   function showMsg(type, text) {
@@ -255,12 +335,24 @@
     document.getElementById('infoMsg').style.display  = 'none';
     if (!text) return;
     const el = document.getElementById(type === 'error' ? 'errorMsg' : 'infoMsg');
-    el.textContent  = text;
+    el.textContent   = text;
     el.style.display = 'block';
   }
 
   function hideResult() {
-    document.getElementById('result').style.display = 'none';
+    document.getElementById('result').style.display      = 'none';
+    document.getElementById('tryAgainBtn').style.display = 'none'; // hide together
+  }
+
+  function updateDeckInfo(remaining, total) {
+    const infoEl = document.getElementById('deckInfo');
+    if (total === 0) { infoEl.style.display = 'none'; return; }
+    const shown = total - remaining;
+    document.getElementById('deckText').textContent =
+      `${shown} dari ${total} pilihan sudah muncul` +
+      (remaining === 0 ? ' — daftar dikocok ulang!' : '');
+    document.getElementById('deckBarFill').style.width = `${(shown / total) * 100}%`;
+    infoEl.style.display = 'block';
   }
 
   function populateSelect(selectEl, values, placeholder) {
@@ -273,7 +365,46 @@
   }
 
   /* ════════════════════════════════════════════
-     INIT — fetch & parse CSV
+     CORE: Pick & display one result
+  ════════════════════════════════════════════ */
+  function pickOne() {
+    showMsg(null);
+
+    const mall = document.getElementById('mallSelect').value;
+    if (!mall) { showMsg('error', '⚠️ Pilih mall terlebih dahulu.'); return; }
+
+    const pool = getPool();
+    if (!pool.length) {
+      showMsg('error', '😕 Tidak ada data untuk kombinasi filter ini.');
+      hideResult();
+      updateDeckInfo(0, 0);
+      return;
+    }
+
+    // Deck exhausted or first run → build new shuffled deck
+    if (deck.length === 0) deck = buildDeck(pool);
+
+    // Pick from front of deck
+    const pick = deck.shift();
+    lastStoreName = pick[COL_STORE];
+    updateDeckInfo(deck.length, pool.length);
+
+    // Show result
+    document.getElementById('storeName').textContent = pick[COL_STORE] || '—';
+    document.getElementById('storeArea').textContent = pick[COL_AREA]  || '—';
+
+    const resultEl = document.getElementById('result');
+    resultEl.style.display   = 'block';
+    resultEl.style.animation = 'none';
+    resultEl.offsetHeight;    // reflow
+    resultEl.style.animation = '';
+
+    // Show "Coba Lagi" button
+    document.getElementById('tryAgainBtn').style.display = 'block';
+  }
+
+  /* ════════════════════════════════════════════
+     INIT
   ════════════════════════════════════════════ */
   async function init() {
     const mallSel = document.getElementById('mallSelect');
@@ -282,13 +413,9 @@
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const text = await res.text();
       allData    = parseCSV(text);
-
       if (!allData.length) throw new Error('CSV kosong atau format tidak dikenali.');
-
-      // Populate mall dropdown
       populateSelect(mallSel, allData.map(r => r[COL_MALL]), 'Pilih Mall');
       mallSel.disabled = false;
-      showMsg(null);
     } catch (err) {
       mallSel.innerHTML = '<option value="">— Gagal memuat data —</option>';
       showMsg('error', `⚠️ Tidak dapat memuat CSV: ${err.message}. Pastikan file "${CSV_FILE}" ada di folder yang sama.`);
@@ -297,17 +424,16 @@
   }
 
   /* ════════════════════════════════════════════
-     EVENT: Mall changed → update Category
+     EVENTS
   ════════════════════════════════════════════ */
   document.getElementById('mallSelect').addEventListener('change', function () {
     const catSel    = document.getElementById('categorySelect');
     const decideBtn = document.getElementById('decideBtn');
-    hideResult();
-    showMsg(null);
+    resetDeck();
 
     if (!this.value) {
-      catSel.innerHTML = '<option value="">— Pilih mall dulu —</option>';
-      catSel.disabled  = true;
+      catSel.innerHTML   = '<option value="">— Pilih mall dulu —</option>';
+      catSel.disabled    = true;
       decideBtn.disabled = true;
       return;
     }
@@ -315,9 +441,8 @@
     const filtered = allData.filter(r => r[COL_MALL] === this.value);
     populateSelect(catSel, filtered.map(r => r[COL_CATEGORY]), 'Semua Kategori');
 
-    // Add "All" option at top
     const allOpt = document.createElement('option');
-    allOpt.value = '__ALL__';
+    allOpt.value       = '__ALL__';
     allOpt.textContent = '🍴 Semua Kategori';
     catSel.insertBefore(allOpt, catSel.children[1]);
 
@@ -325,54 +450,12 @@
     decideBtn.disabled = false;
   });
 
-  /* ════════════════════════════════════════════
-     EVENT: Category changed
-  ════════════════════════════════════════════ */
-  document.getElementById('categorySelect').addEventListener('change', function () {
-    hideResult();
-    showMsg(null);
-  });
+  document.getElementById('categorySelect').addEventListener('change', resetDeck);
 
-  /* ════════════════════════════════════════════
-     EVENT: Decide button
-  ════════════════════════════════════════════ */
-  document.getElementById('decideBtn').addEventListener('click', function () {
-    hideResult();
-    showMsg(null);
+  // Both buttons call the same pickOne() function
+  document.getElementById('decideBtn').addEventListener('click', pickOne);
+  document.getElementById('tryAgainBtn').addEventListener('click', pickOne);
 
-    const mall     = document.getElementById('mallSelect').value;
-    const category = document.getElementById('categorySelect').value;
-
-    if (!mall) { showMsg('error', '⚠️ Pilih mall terlebih dahulu.'); return; }
-
-    // Filter pool
-    let pool = allData.filter(r => r[COL_MALL] === mall);
-    if (category && category !== '__ALL__') {
-      pool = pool.filter(r => r[COL_CATEGORY] === category);
-    }
-
-    if (!pool.length) {
-      showMsg('error', '😕 Tidak ada data untuk kombinasi filter ini.');
-      return;
-    }
-
-    // Pick random
-    const pick = pool[Math.floor(Math.random() * pool.length)];
-
-    // Show result
-    document.getElementById('storeName').textContent = pick[COL_STORE] || '—';
-    document.getElementById('storeArea').textContent = pick[COL_AREA]  || '—';
-    const resultEl = document.getElementById('result');
-    resultEl.style.display = 'block';
-    // Re-trigger animation
-    resultEl.style.animation = 'none';
-    resultEl.offsetHeight;   // reflow
-    resultEl.style.animation = '';
-  });
-
-  /* ════════════════════════════════════════════
-     START
-  ════════════════════════════════════════════ */
   init();
 </script>
 </body>
