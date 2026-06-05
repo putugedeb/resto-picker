@@ -71,7 +71,7 @@
     select option { background: #1a1a2e; color: #fff; }
     select:disabled { opacity: 0.4; cursor: not-allowed; }
 
-    /* ── Primary Button ── */
+    /* ── Button ── */
     .btn {
       width: 100%;
       margin-top: 0.5rem;
@@ -136,30 +136,6 @@
       font-size: 0.85rem;
       color: #ffb3bf;
     }
-
-    /* ── "Coba Lagi" Button ── */
-    #tryAgainBtn {
-      width: 100%;
-      margin-top: 1rem;
-      padding: 0.7rem;
-      border: 1.5px solid rgba(255,255,255,0.25);
-      border-radius: 12px;
-      background: transparent;
-      color: rgba(255,255,255,0.75);
-      font-size: 0.9rem;
-      font-weight: 600;
-      letter-spacing: 0.03em;
-      cursor: pointer;
-      transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
-      display: none; /* hidden until first result */
-    }
-    #tryAgainBtn:hover  {
-      background: rgba(255,255,255,0.1);
-      border-color: rgba(255,255,255,0.5);
-      color: #fff;
-      transform: translateY(-1px);
-    }
-    #tryAgainBtn:active { transform: translateY(0); }
 
     /* ── Deck Progress ── */
     #deckInfo {
@@ -235,9 +211,6 @@
     <div class="store-name" id="storeName"></div>
     <div class="store-area">📍 <span id="storeArea"></span></div>
   </div>
-
-  <!-- Coba Lagi -->
-  <button id="tryAgainBtn">🔄 Coba Lagi</button>
 
   <!-- Deck Progress -->
   <div id="deckInfo">
@@ -340,8 +313,7 @@
   }
 
   function hideResult() {
-    document.getElementById('result').style.display      = 'none';
-    document.getElementById('tryAgainBtn').style.display = 'none'; // hide together
+    document.getElementById('result').style.display = 'none';
   }
 
   function updateDeckInfo(remaining, total) {
@@ -381,26 +353,20 @@
       return;
     }
 
-    // Deck exhausted or first run → build new shuffled deck
     if (deck.length === 0) deck = buildDeck(pool);
 
-    // Pick from front of deck
     const pick = deck.shift();
     lastStoreName = pick[COL_STORE];
     updateDeckInfo(deck.length, pool.length);
 
-    // Show result
     document.getElementById('storeName').textContent = pick[COL_STORE] || '—';
     document.getElementById('storeArea').textContent = pick[COL_AREA]  || '—';
 
     const resultEl = document.getElementById('result');
     resultEl.style.display   = 'block';
     resultEl.style.animation = 'none';
-    resultEl.offsetHeight;    // reflow
+    resultEl.offsetHeight;
     resultEl.style.animation = '';
-
-    // Show "Coba Lagi" button
-    document.getElementById('tryAgainBtn').style.display = 'block';
   }
 
   /* ════════════════════════════════════════════
@@ -451,10 +417,7 @@
   });
 
   document.getElementById('categorySelect').addEventListener('change', resetDeck);
-
-  // Both buttons call the same pickOne() function
   document.getElementById('decideBtn').addEventListener('click', pickOne);
-  document.getElementById('tryAgainBtn').addEventListener('click', pickOne);
 
   init();
 </script>
