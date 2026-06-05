@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mall Food Randomizer</title>
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      color: #fff;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      width: 100%;
+      max-width: 520px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+    }
+
+    /* ── Header ── */
+    .header { text-align: center; margin-bottom: 2rem; }
+    .header .emoji { font-size: 3rem; display: block; margin-bottom: 0.5rem; }
+    .header h1 { font-size: 1.8rem; font-weight: 700; letter-spacing: -0.5px; }
+    .header p  { margin-top: 0.4rem; font-size: 0.95rem; color: rgba(255,255,255,0.6); }
+
+    /* ── Labels & Selects ── */
+    .field { margin-bottom: 1.2rem; }
+    label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 0.45rem;
+    }
+
+    select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      font-size: 0.95rem;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='white' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      cursor: pointer;
+      transition: border-color 0.2s, background-color 0.2s;
+    }
+    select:focus { outline: none; border-color: rgba(255,255,255,0.5); background-color: rgba(255,255,255,0.15); }
+    select option { background: #1a1a2e; color: #fff; }
+    select:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* ── Button ── */
+    .btn {
+      width: 100%;
+      margin-top: 0.5rem;
+      padding: 0.9rem;
+      border: none;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #e94560, #c62a47);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s, opacity 0.2s;
+      box-shadow: 0 4px 20px rgba(233,69,96,0.45);
+    }
+    .btn:hover:not(:disabled)  { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(233,69,96,0.6); }
+    .btn:active:not(:disabled) { transform: translateY(0);    box-shadow: 0 3px 12px rgba(233,69,96,0.4); }
+    .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    /* ── Result Card ── */
+    #result {
+      margin-top: 1.8rem;
+      padding: 1.5rem;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      text-align: center;
+      display: none;
+      animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.85) translateY(10px); }
+      to   { opacity: 1; transform: scale(1)    translateY(0);     }
+    }
+
+    #result .result-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 0.6rem;
+    }
+    #result .store-name {
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+    }
+    #result .store-area {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.65);
+    }
+    #result .store-area span {
+      display: inline-block;
+      margin-top: 0.3rem;
+      background: rgba(233,69,96,0.25);
+      border: 1px solid rgba(233,69,96,0.5);
+      border-radius: 20px;
+      padding: 0.25rem 0.85rem;
+      font-size: 0.85rem;
+      color: #ffb3bf;
+    }
+
+    /* ── Error / Info ── */
+    .msg {
+      margin-top: 1rem;
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      text-align: center;
+      display: none;
+    }
+    .msg.error { background: rgba(233,69,96,0.2); border: 1px solid rgba(233,69,96,0.4); color: #ffb3bf; }
+    .msg.info  { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.7); }
+
+    /* ── Footer ── */
+    footer { margin-top: 2rem; font-size: 0.78rem; color: rgba(255,255,255,0.3); text-align: center; }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <!-- Header -->
+  <div class="header">
+    <span class="emoji">🎲</span>
+    <h1>Mall Food Randomizer</h1>
+    <p>Bingung mau makan apa? Biar kami yang putuskan!</p>
+  </div>
+
+  <!-- Filter: Mall -->
+  <div class="field">
+    <label for="mallSelect">📍 Pilih Mall</label>
+    <select id="mallSelect">
+      <option value="">— Memuat data... —</option>
+    </select>
+  </div>
+
+  <!-- Filter: Category -->
+  <div class="field">
+    <label for="categorySelect">🍽️ Pilih Kategori</label>
+    <select id="categorySelect" disabled>
+      <option value="">— Pilih mall dulu —</option>
+    </select>
+  </div>
+
+  <!-- CTA Button -->
+  <button class="btn" id="decideBtn" disabled>🎲 Help me decide!</button>
+
+  <!-- Messages -->
+  <div class="msg error" id="errorMsg"></div>
+  <div class="msg info"  id="infoMsg"></div>
+
+  <!-- Result -->
+  <div id="result">
+    <div class="result-label">✨ Kamu harus coba ini!</div>
+    <div class="store-name" id="storeName"></div>
+    <div class="store-area">
+      📍 <span id="storeArea"></span>
+    </div>
+  </div>
+</div>
+
+<footer>Data bersumber dari Mall_FnB_Directory.csv</footer>
+
+<script>
+  /* ════════════════════════════════════════════
+     CONFIG — sesuaikan nama kolom jika berbeda
+  ════════════════════════════════════════════ */
+  const CSV_FILE     = 'Mall_FnB_Directory.csv';
+  const COL_MALL     = 'Mall';
+  const COL_CATEGORY = 'Category';
+  const COL_STORE    = 'Store';
+  const COL_AREA     = 'Area';
+
+  /* ════════════════════════════════════════════
+     STATE
+  ════════════════════════════════════════════ */
+  let allData = [];   // array of row-objects
+
+  /* ════════════════════════════════════════════
+     UTILS
+  ════════════════════════════════════════════ */
+
+  /** Minimal CSV parser — handles quoted fields with commas/newlines */
+  function parseCSV(text) {
+    const rows   = [];
+    let   field  = '';
+    let   row    = [];
+    let   inQuote = false;
+
+    for (let i = 0; i < text.length; i++) {
+      const ch   = text[i];
+      const next = text[i + 1];
+
+      if (inQuote) {
+        if (ch === '"' && next === '"') { field += '"'; i++; }   // escaped quote
+        else if (ch === '"')            { inQuote = false; }
+        else                            { field += ch; }
+      } else {
+        if      (ch === '"')  { inQuote = true; }
+        else if (ch === ',')  { row.push(field.trim()); field = ''; }
+        else if (ch === '\n') { row.push(field.trim()); rows.push(row); row = []; field = ''; }
+        else if (ch === '\r') { /* skip */ }
+        else                  { field += ch; }
+      }
+    }
+    // last field / row
+    if (field || row.length) { row.push(field.trim()); rows.push(row); }
+
+    // Convert to array-of-objects using first row as headers
+    const headers = rows[0].map(h => h.replace(/^\uFEFF/, '')); // strip BOM
+    return rows.slice(1)
+               .filter(r => r.some(c => c !== ''))              // skip blank rows
+               .map(r => Object.fromEntries(headers.map((h, i) => [h, r[i] ?? ''])));
+  }
+
+  function showMsg(type, text) {
+    document.getElementById('errorMsg').style.display = 'none';
+    document.getElementById('infoMsg').style.display  = 'none';
+    if (!text) return;
+    const el = document.getElementById(type === 'error' ? 'errorMsg' : 'infoMsg');
+    el.textContent  = text;
+    el.style.display = 'block';
+  }
+
+  function hideResult() {
+    document.getElementById('result').style.display = 'none';
+  }
+
+  function populateSelect(selectEl, values, placeholder) {
+    selectEl.innerHTML = `<option value="">— ${placeholder} —</option>`;
+    [...new Set(values)].sort().forEach(v => {
+      const opt = document.createElement('option');
+      opt.value = opt.textContent = v;
+      selectEl.appendChild(opt);
+    });
+  }
+
+  /* ════════════════════════════════════════════
+     INIT — fetch & parse CSV
+  ════════════════════════════════════════════ */
+  async function init() {
+    const mallSel = document.getElementById('mallSelect');
+    try {
+      const res  = await fetch(CSV_FILE);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const text = await res.text();
+      allData    = parseCSV(text);
+
+      if (!allData.length) throw new Error('CSV kosong atau format tidak dikenali.');
+
+      // Populate mall dropdown
+      populateSelect(mallSel, allData.map(r => r[COL_MALL]), 'Pilih Mall');
+      mallSel.disabled = false;
+      showMsg(null);
+    } catch (err) {
+      mallSel.innerHTML = '<option value="">— Gagal memuat data —</option>';
+      showMsg('error', `⚠️ Tidak dapat memuat CSV: ${err.message}. Pastikan file "${CSV_FILE}" ada di folder yang sama.`);
+      console.error(err);
+    }
+  }
+
+  /* ════════════════════════════════════════════
+     EVENT: Mall changed → update Category
+  ════════════════════════════════════════════ */
+  document.getElementById('mallSelect').addEventListener('change', function () {
+    const catSel    = document.getElementById('categorySelect');
+    const decideBtn = document.getElementById('decideBtn');
+    hideResult();
+    showMsg(null);
+
+    if (!this.value) {
+      catSel.innerHTML = '<option value="">— Pilih mall dulu —</option>';
+      catSel.disabled  = true;
+      decideBtn.disabled = true;
+      return;
+    }
+
+    const filtered = allData.filter(r => r[COL_MALL] === this.value);
+    populateSelect(catSel, filtered.map(r => r[COL_CATEGORY]), 'Semua Kategori');
+
+    // Add "All" option at top
+    const allOpt = document.createElement('option');
+    allOpt.value = '__ALL__';
+    allOpt.textContent = '🍴 Semua Kategori';
+    catSel.insertBefore(allOpt, catSel.children[1]);
+
+    catSel.disabled    = false;
+    decideBtn.disabled = false;
+  });
+
+  /* ════════════════════════════════════════════
+     EVENT: Category changed
+  ════════════════════════════════════════════ */
+  document.getElementById('categorySelect').addEventListener('change', function () {
+    hideResult();
+    showMsg(null);
+  });
+
+  /* ════════════════════════════════════════════
+     EVENT: Decide button
+  ════════════════════════════════════════════ */
+  document.getElementById('decideBtn').addEventListener('click', function () {
+    hideResult();
+    showMsg(null);
+
+    const mall     = document.getElementById('mallSelect').value;
+    const category = document.getElementById('categorySelect').value;
+
+    if (!mall) { showMsg('error', '⚠️ Pilih mall terlebih dahulu.'); return; }
+
+    // Filter pool
+    let pool = allData.filter(r => r[COL_MALL] === mall);
+    if (category && category !== '__ALL__') {
+      pool = pool.filter(r => r[COL_CATEGORY] === category);
+    }
+
+    if (!pool.length) {
+      showMsg('error', '😕 Tidak ada data untuk kombinasi filter ini.');
+      return;
+    }
+
+    // Pick random
+    const pick = pool[Math.floor(Math.random() * pool.length)];
+
+    // Show result
+    document.getElementById('storeName').textContent = pick[COL_STORE] || '—';
+    document.getElementById('storeArea').textContent = pick[COL_AREA]  || '—';
+    const resultEl = document.getElementById('result');
+    resultEl.style.display = 'block';
+    // Re-trigger animation
+    resultEl.style.animation = 'none';
+    resultEl.offsetHeight;   // reflow
+    resultEl.style.animation = '';
+  });
+
+  /* ════════════════════════════════════════════
+     START
+  ════════════════════════════════════════════ */
+  init();
+</script>
+</body>
+</html>
