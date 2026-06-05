@@ -1,22 +1,22 @@
 Mall,Category,Store,Area
-Grand Indonesia,Standard restaurant,4Fingers,West Mall level LG
+Grand Indonesia,Fast food,4Fingers,West Mall level LG
 Grand Indonesia,Pastry & Bakery,7 AM Bakers,East Mall level LG
 Grand Indonesia,Standard restaurant,Abura Soba Yamatoten,West Mall level 3A
 Grand Indonesia,Beverages only,ACAII,East Mall level LG
 Grand Indonesia,Beverages only,Acaraki,East Mall level LG
 Grand Indonesia,Pastry & Bakery,Artirasa,East Mall level LG
 Grand Indonesia,Standard restaurant,Atmos Otaku,Skybridge level 2
-Grand Indonesia,Light bites,Auntie Anne’s,West Mall level LG
-Grand Indonesia,Standard restaurant,Ayara Thai Grill & Hotpot,East Mall level 5
-Grand Indonesia,Light bites,Baby Dutch Pancake,West Mall level 3A
+Grand Indonesia,Pastry & Bakery,Auntie Anne’s,West Mall level LG
+Grand Indonesia,All-you-can-eat & Grill,Ayara Thai Grill & Hotpot,East Mall level 5
+Grand Indonesia,Pastry & Bakery,Baby Dutch Pancake,West Mall level 3A
 Grand Indonesia,Standard restaurant,Baia Nonna,East Mall level LG
 Grand Indonesia,Fast food,Bakmi GM,FOODPRINT (West Mall level 5)
-Grand Indonesia,Pastry & Bakery,Bakpau A Satu,West Mall level LG
+Grand Indonesia,Light bites,Bakpau A Satu,West Mall level LG
 Grand Indonesia,Fast food,Bakso Afung,FOODPRINT (West Mall level 5)
 Grand Indonesia,Standard restaurant,Bakso Tjap Bima,East Mall level 5
 Grand Indonesia,Beverages only,Ban Ban,West Mall level 3A
-Grand Indonesia,Standard restaurant,Bastian,East Mall level Ground
-Grand Indonesia,Desserts,Beard Papa’s,East Mall level LG
+Grand Indonesia,High-end restaurant,Bastian,East Mall level Ground
+Grand Indonesia,Pastry & Bakery,Beard Papa’s,East Mall level LG
 Grand Indonesia,Standard restaurant,Bellamama,Skybridge level 3A
 Grand Indonesia,Pastry & Bakery,Best Friend Bakery,West Mall level LG
 Grand Indonesia,Cafe,Bleum Coffee,East Mall level 3A
@@ -26,12 +26,12 @@ Grand Indonesia,Pastry & Bakery,Bonjour,West Mall level LG
 Grand Indonesia,Pastry & Bakery,Bonjour (East Mall),East Mall level LG
 Grand Indonesia,Beverages only,Boost Juice,West Mall level 3A
 Grand Indonesia,Cafe,Cafe Kissa,East Mall level Ground
-Grand Indonesia,Standard restaurant,Caffe Milano,East Mall level Ground
+Grand Indonesia,Cafe,Caffe Milano,East Mall level Ground
 Grand Indonesia,Standard restaurant,CGV Kitchen,West Mall level 8
-Grand Indonesia,Standard restaurant,Chateraise,East Mall level 3A
+Grand Indonesia,Pastry & Bakery,Chateraise,East Mall level 3A
 Grand Indonesia,Beverages only,Chatime Atealier,East Mall level 3A
 Grand Indonesia,Beverages only,CHICHA San Chen,East Mall level 3
-Grand Indonesia,Light bites,Cinnabon,East Mall level 3A
+Grand Indonesia,Pastry & Bakery,Cinnabon,East Mall level 3A
 Grand Indonesia,High-end restaurant,Coach Restaurant,West Mall level Ground
 Grand Indonesia,Standard restaurant,Coco Ichibanya,West Mall level 3A
 Grand Indonesia,Desserts,Cold Stone,West Mall level LG
@@ -41,26 +41,26 @@ Grand Indonesia,Cafe,Djournal (Cafe Kissa),East Mall level Ground
 Grand Indonesia,Cafe,Djournal Coffee,West Mall level Ground
 Grand Indonesia,Pastry & Bakery,Don Bakeshop,Skybridge level 3A
 Grand Indonesia,Fast food,Doner Kebab,FOODPRINT (West Mall level 5)
-Grand Indonesia,Standard restaurant,Donut of Curiosity,West Mall level 1
+Grand Indonesia,Pastry & Bakery,Donut of Curiosity,West Mall level 1
 Grand Indonesia,Desserts,Dore by LeTAO,West Mall level LG
 Grand Indonesia,Desserts,Dough Lab,West Mall level LG
 Grand Indonesia,Desserts,Doughzen,Skybridge level 3A
-Grand Indonesia,Fast food,DQ Dairy Queen,FOODPRINT (West Mall level 5)
-Grand Indonesia,High-end restaurant,Dragon Hot Pot,West Mall level LG
-Grand Indonesia,Standard restaurant,Dynamic Bakery (Under Renovation),East Mall level 3
+Grand Indonesia,Desserts,DQ Dairy Queen,FOODPRINT (West Mall level 5)
+Grand Indonesia,Standard restaurant,Dragon Hot Pot,West Mall level LG
+Grand Indonesia,Pastry & Bakery,Dynamic Bakery (Under Renovation),East Mall level 3
 Grand Indonesia,Standard restaurant,East Quarter,East Mall level LG
 Grand Indonesia,Beverages only,Endorphins,East Mall level LG
-Grand Indonesia,Fast food,Esteboo,FOODPRINT (West Mall level 5)
+Grand Indonesia,Beverages only,Esteboo,FOODPRINT (West Mall level 5)
 Grand Indonesia,Fast food,FamiCafe,FOODPRINT (West Mall level 5)
 Grand Indonesia,Fast food,Fiesta Steak,FOODPRINT (West Mall level 5)
 Grand Indonesia,Standard restaurant,Fin's Recipe,West Mall level LG
 Grand Indonesia,Pastry & Bakery,First Love? Patisserie,West Mall level LG
 Grand Indonesia,Fast food,Five Monkeys Burger (Under Renovation),FOODPRINT (West Mall level 5)
 Grand Indonesia,Standard restaurant,Foek Lam,West Mall level 3A
-Grand Indonesia,High-end restaurant,Fogo,West Mall level 3A
-Grand Indonesia,Desserts,Fore Donut,East Mall level Ground
-Grand Indonesia,Desserts,Fudgybro,Skybridge level 3A
-Grand Indonesia,Standard restaurant,Gaga,West Mall level LG
+Grand Indonesia,All-you-can-eat & Grill,Fogo,West Mall level 3A
+Grand Indonesia,Pastry & Bakery,Fore Donut,East Mall level Ground
+Grand Indonesia,Pastry & Bakery,Fudgybro,Skybridge level 3A
+Grand Indonesia,Beverages only,Gaga,West Mall level LG
 Grand Indonesia,Standard restaurant,Genki Sushi,West Mall level 2
 Grand Indonesia,Light bites,Gindaco,East Mall level 3A
 Grand Indonesia,Desserts,Godiva,West Mall level LG
@@ -71,22 +71,22 @@ Grand Indonesia,High-end restaurant,Haidilao Hot Pot,East Mall level UG
 Grand Indonesia,Standard restaurant,Haraku Ramen,West Mall level 3A
 Grand Indonesia,Fast food,Hokben (Under Renovation),FOODPRINT (West Mall level 5)
 Grand Indonesia,Standard restaurant,Hokkaido Ya,West Mall level 3A
-Grand Indonesia,Fast food,Hong Tang,FOODPRINT (West Mall level 5)
+Grand Indonesia,Desserts,Hong Tang,FOODPRINT (West Mall level 5)
 Grand Indonesia,Standard restaurant,Ikkudo Ichi,West Mall level LG
 Grand Indonesia,Standard restaurant,Ippudo,West Mall level 3A
-Grand Indonesia,Standard restaurant,J.CO Donuts & Coffee,West Mall level LG
+Grand Indonesia,Pastry & Bakery,J.CO Donuts & Coffee,West Mall level LG
 Grand Indonesia,Fast food,Java Kitchen,FOODPRINT (West Mall level 5)
 Grand Indonesia,Standard restaurant,Jiguang,East Mall level 5
 Grand Indonesia,Standard restaurant,Jittlada,Skybridge level 3A
-Grand Indonesia,Fast food,Just Coco,FOODPRINT (West Mall level 5)
+Grand Indonesia,Beverages only,Just Coco,FOODPRINT (West Mall level 5)
 Grand Indonesia,Standard restaurant,Kafe Betawi,West Mall level LG
-Grand Indonesia,High-end restaurant,Karnivor,East Mall level 5
+Grand Indonesia,All-you-can-eat & Grill,Karnivor,East Mall level 5
 Grand Indonesia,Standard restaurant,Katsukita,West Mall level 5
 Grand Indonesia,Standard restaurant,Kaybee’s,East Mall level LG
-Grand Indonesia,Pastry & Bakery,Kempi Deli,East Mall level 2
+Grand Indonesia,Cafe,Kempi Deli,East Mall level 2
 Grand Indonesia,Fast food,KFC,FOODPRINT (West Mall level 5)
 Grand Indonesia,Standard restaurant,Kimukatsu,East Mall level 3A
-Grand Indonesia,Standard restaurant,Kin Khao,East Mall level Ground
+Grand Indonesia,High-end restaurant,Kin Khao,East Mall level Ground
 Grand Indonesia,All-you-can-eat & Grill,Kintan Buffet,West Mall level 3A
 Grand Indonesia,Beverages only,KOI Thé,West Mall level 3A
 Grand Indonesia,Beverages only,Kopi Kenangan,East Mall level 2
@@ -97,11 +97,11 @@ Grand Indonesia,Pastry & Bakery,La Maison,West Mall level LG
 Grand Indonesia,Standard restaurant,Lamian Palace,Skybridge level 5
 Grand Indonesia,Standard restaurant,Leten by Paradise Dynasty,West Mall level 3A
 Grand Indonesia,Standard restaurant,Little Red Dot,West Mall level 3A
-Grand Indonesia,Standard restaurant,Macanria,West Mall level LG
+Grand Indonesia,Beverages only,Macanria,West Mall level LG
 Grand Indonesia,Desserts,Mack's Creamery,East Mall level 5
 Grand Indonesia,Beverages only,Mad Milk,East Mall level LG
 Grand Indonesia,Light bites,Maeko Sando,West Mall level LG
-Grand Indonesia,Standard restaurant,Mamaroz,West Mall level 5
+Grand Indonesia,Beverages only,Mamaroz,West Mall level 5
 Grand Indonesia,Fast food,Manggang,FOODPRINT (West Mall level 5)
 Grand Indonesia,High-end restaurant,Markette,East Mall level Ground
 Grand Indonesia,Standard restaurant,Marugame Udon,West Mall level 3A
@@ -112,12 +112,12 @@ Grand Indonesia,Standard restaurant,My Eureka,West Mall level 3A
 Grand Indonesia,Fast food,Nasi Karanjang,FOODPRINT (West Mall level 5)
 Grand Indonesia,Standard restaurant,Nona Rasa,East Mall level 5
 Grand Indonesia,Fast food,Noodle King Express,FOODPRINT (West Mall level 5)
-Grand Indonesia,Standard restaurant,Ohayo Rice Bar,West Mall level 3A
-Grand Indonesia,Standard restaurant,Oma Elly,West Mall level LG
+Grand Indonesia,Fast food,Ohayo Rice Bar,West Mall level 3A
+Grand Indonesia,Desserts,Oma Elly,West Mall level LG
 Grand Indonesia,Standard restaurant,Oshu-san,West Mall level 3A
-Grand Indonesia,High-end restaurant,Pancious,West Mall level 3A
+Grand Indonesia,Standard restaurant,Pancious,West Mall level 3A
 Grand Indonesia,Standard restaurant,Pandan Soedji,East Mall level LG
-Grand Indonesia,Standard restaurant,PAUL,West Mall level Ground
+Grand Indonesia,High-end restaurant,PAUL,West Mall level Ground
 Grand Indonesia,Pastry & Bakery,PAUL BAKERY,West Mall level LG
 Grand Indonesia,High-end restaurant,Paulaner Brauhaus,East Mall level 2
 Grand Indonesia,Standard restaurant,Pepper Lunch,West Mall level 3A
@@ -141,16 +141,16 @@ Grand Indonesia,Standard restaurant,Santhai,West Mall level LG
 Grand Indonesia,Fast food,Sari Ratu,FOODPRINT (West Mall level 5)
 Grand Indonesia,Fast food,Sari Sanjaya,FOODPRINT (West Mall level 5)
 Grand Indonesia,High-end restaurant,Sate & Seafood Senayan,Skybridge level 5
-Grand Indonesia,Standard restaurant,Saturdays F&B,East Mall level 3A
+Grand Indonesia,Cafe,Saturdays F&B,East Mall level 3A
 Grand Indonesia,Cafe,Second Floor Coffee,West Mall level UG
 Grand Indonesia,Cafe,Second Floor Coffee,East Mall level 3
 Grand Indonesia,Fast food,Seporsi Mie Kari,FOODPRINT (West Mall level 5)
 Grand Indonesia,All-you-can-eat & Grill,Shabu Shabu Letasu,West Mall level 3A
-Grand Indonesia,Fast food,Shake Shake In A Tub,FOODPRINT (West Mall level 5)
-Grand Indonesia,Fast food,Shigeru,FOODPRINT (West Mall level 5)
-Grand Indonesia,Standard restaurant,Shihlin,West Mall level 3A
+Grand Indonesia,Light bites,Shake Shake In A Tub,FOODPRINT (West Mall level 5)
+Grand Indonesia,Light bites,Shigeru,FOODPRINT (West Mall level 5)
+Grand Indonesia,Light bites,Shihlin,West Mall level 3A
 Grand Indonesia,Pastry & Bakery,Shokupan Bakery,West Mall level LG
-Grand Indonesia,Light bites,Shushu,West Mall level LG
+Grand Indonesia,Beverages only,Shushu,West Mall level LG
 Grand Indonesia,High-end restaurant,Social House,East Mall level 1
 Grand Indonesia,Standard restaurant,Song Fa Bak Kut Teh (Under Renovation),Skybridge level 3A
 Grand Indonesia,Fast food,Soto Betawi H. Mamat,FOODPRINT (West Mall level 5)
@@ -158,31 +158,31 @@ Grand Indonesia,Desserts,Sour Sally,West Mall level LG
 Grand Indonesia,Cafe,Starbucks Coffee,West Mall level 1
 Grand Indonesia,Cafe,Starbucks Coffee,East Mall level 3
 Grand Indonesia,Cafe,Starbucks Reserve,West Mall level Ground
-Grand Indonesia,Standard restaurant,Subway,West Mall level LG
+Grand Indonesia,Fast food,Subway,West Mall level LG
 Grand Indonesia,Fast food,Sugakiya,FOODPRINT (West Mall level 5)
-Grand Indonesia,Standard restaurant,Super Grain,West Mall level 3A
+Grand Indonesia,Fast food,Super Grain,West Mall level 3A
 Grand Indonesia,Standard restaurant,Sushi GO!,West Mall level 5
 Grand Indonesia,Standard restaurant,Sushi Hiro (Under Renovation),Skybridge level 3A
 Grand Indonesia,Standard restaurant,Sushi Tei,West Mall level LG
 Grand Indonesia,Standard restaurant,Sushiro,East Mall level 5
 Grand Indonesia,Standard restaurant,Taeyang Sung,East Mall level LG
-Grand Indonesia,Standard restaurant,Taliwang Bali,Skybridge level 5
-Grand Indonesia,Cafe,Tanamera,West Mall level LG
+Grand Indonesia,High-end restaurant,Taliwang Bali,Skybridge level 5
+Grand Indonesia,Beverages only,Tanamera,West Mall level LG
 Grand Indonesia,Standard restaurant,Taqueria El Guapo,East Mall level 5
 Grand Indonesia,Beverages only,Teazzi,West Mall level 5
-Grand Indonesia,Standard restaurant,The Buffalo Express,West Mall level LG
+Grand Indonesia,Fast food,The Buffalo Express,West Mall level LG
 Grand Indonesia,Cafe,The Coffee Bean & Tea Leaf,West Mall level LG
 Grand Indonesia,Fast food,The Halal Guys,FOODPRINT (West Mall level 5)
-Grand Indonesia,Standard restaurant,The Pancake CO.,West Mall level LG
+Grand Indonesia,Pastry & Bakery,The Pancake CO.,West Mall level LG
 Grand Indonesia,Standard restaurant,The People’s Café,West Mall level 5
-Grand Indonesia,Light bites,Three Uncles Express,West Mall level LG
+Grand Indonesia,Fast food,Three Uncles Express,West Mall level LG
 Grand Indonesia,Standard restaurant,Tom Sushi,East Mall level 3A
 Grand Indonesia,Standard restaurant,Tom Tom,Skybridge level 5
 Grand Indonesia,Pastry & Bakery,Tous Les Jours,West Mall level LG
 Grand Indonesia,Desserts,Udders,East Mall level LG
 Grand Indonesia,Desserts,Uji Matcha,West Mall level LG
 Grand Indonesia,High-end restaurant,Union Deli,East Mall level Ground
-Grand Indonesia,Standard restaurant,Vines,East Mall level LG
+Grand Indonesia,Beverages only,Vines,East Mall level LG
 Grand Indonesia,Standard restaurant,Vineyard,East Mall level LG
 Grand Indonesia,Desserts,Warabimochi Kamakura,East Mall level 3A
 Grand Indonesia,Cafe,Waroeng Kopi,West Mall level 3
@@ -191,7 +191,7 @@ Grand Indonesia,Standard restaurant,Wee Nam Kee,East Mall level 3A
 Grand Indonesia,Fast food,Wingstop,FOODPRINT (West Mall level 5)
 Grand Indonesia,Fast food,Ya Kun Kaya Toast,FOODPRINT (West Mall level 5)
 Grand Indonesia,Standard restaurant,Yakiniku Like,West Mall level 5
-Grand Indonesia,Beverages only,Yao Yao,East Mall level 5
+Grand Indonesia,Desserts,Yao Yao,East Mall level 5
 Grand Indonesia,Standard restaurant,Yoguchi,East Mall level 5
 Grand Indonesia,Standard restaurant,Yoshinoya,West Mall level 3A
 Grand Indonesia,Standard restaurant,You Ma You La,West Mall level 3A
